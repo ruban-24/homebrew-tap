@@ -1,8 +1,8 @@
 class Agex < Formula
   desc "Worktree-isolated task runner for AI coding agents"
   homepage "https://github.com/ruban-24/agex"
-  url "https://registry.npmjs.org/@ruban24/agex/-/agex-0.4.0.tgz"
-  sha256 "23098f3ca8e91310678856725bd6d68eb341f89110c1744eb7c9d205ad917a4e"
+  url "https://registry.npmjs.org/@ruban24/agex/-/agex-0.5.0.tgz"
+  sha256 "e5ac2b941930a19ef26b3c4606ee082247659a6d6ed03afcfd0fc35a16fc9a1c"
   license "MIT"
 
   depends_on "node"

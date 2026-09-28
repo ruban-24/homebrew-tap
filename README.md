@@ -30,5 +30,5 @@ switchboard claude
 ```
 
 Update with `brew upgrade ruban-24/tap/switchboard`. Setup requires an installed,
-logged-in coding agent and a Jev API key. See the project README for supported
-platforms and configuration.
+logged-in coding agent and either a Jev API key or an experimental self-hosted
+Laya server. See the project README for supported platforms and configuration.

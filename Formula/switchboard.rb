@@ -1,9 +1,9 @@
 class Switchboard < Formula
   desc "Model and effort routing for coding agents, with Jev support"
   homepage "https://github.com/ruban-24/switchboard"
-  url "https://registry.npmjs.org/@ruban24/switchboard/-/switchboard-0.1.0.tgz"
-  version "0.1.0"
-  sha256 "3e9af0874bfbe3c7ded07423d58d88151f55e654b99e2d1a8eb278679d1bc13b"
+  url "https://registry.npmjs.org/@ruban24/switchboard/-/switchboard-0.2.0.tgz"
+  version "0.2.0"
+  sha256 "032d53941886606f0203c18b75220e00611ff65de69cae13af3d8ef9d79bd60f"
   license "Apache-2.0"
 
   depends_on "node"

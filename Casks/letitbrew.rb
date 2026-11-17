@@ -18,7 +18,20 @@ cask "letitbrew" do
   app "Let It Brew.app"
   binary "#{appdir}/Let It Brew.app/Contents/Helpers/letitbrew"
 
-  uninstall quit: "com.ruban24.letitbrew"
+  # Quit first so the app releases its holds, then unregister the privileged
+  # helper while the app bundle still exists. Skips quietly when the in-app
+  # uninstaller already removed the app.
+  uninstall quit:   "com.ruban24.letitbrew",
+            script: {
+              executable:   "/bin/sh",
+              args:         [
+                "-c",
+                '[ -x "$1" ] || exit 0; "$1" --unregister-daemon',
+                "sh",
+                "#{appdir}/Let It Brew.app/Contents/MacOS/LetItBrew",
+              ],
+              must_succeed: false,
+            }
 
   zap trash: [
     "~/Library/Application Support/LetItBrew",
@@ -27,11 +40,6 @@ cask "letitbrew" do
 
   caveats <<~EOS
     Let It Brew must run from /Applications/Let It Brew.app.
-
-    Before `brew uninstall`, open Settings → About → Uninstall Let It Brew…
-    so the app can release its holds, disconnect its agent hooks, and
-    unregister its background service. Removing the app first can leave
-    that service registered. See:
-      https://github.com/ruban-24/letitbrew/blob/main/docs/UNINSTALL.md
+    To remove its agent hooks, use Settings → About → Uninstall Let It Brew….
   EOS
 end

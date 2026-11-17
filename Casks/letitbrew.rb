@@ -18,15 +18,17 @@ cask "letitbrew" do
   app "Let It Brew.app"
   binary "#{appdir}/Let It Brew.app/Contents/Helpers/letitbrew"
 
-  # Quit first so the app releases its holds, then unregister the privileged
-  # helper while the app bundle still exists. Skips quietly when the in-app
-  # uninstaller already removed the app.
+  # Quit first so the app releases its holds. Then, while the app bundle
+  # still exists, reconcile the sleep setting and unregister the privileged
+  # helper, like the in-app uninstaller. Skips quietly when the app is gone,
+  # the helper was never registered, or reconciliation fails.
   uninstall quit:   "com.ruban24.letitbrew",
             script: {
               executable:   "/bin/sh",
               args:         [
                 "-c",
-                '[ -x "$1" ] || exit 0; "$1" --unregister-daemon',
+                '[ -x "$1" ] || exit 0; s=$("$1" --prepare-update) || exit 0; ' \
+                'case $s in *registered*) "$1" --unregister-daemon ;; esac',
                 "sh",
                 "#{appdir}/Let It Brew.app/Contents/MacOS/LetItBrew",
               ],
